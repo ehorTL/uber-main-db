@@ -6,7 +6,7 @@
 
             absolute: false,
             rootUrl: 'http://localhost',
-            routes : [{"host":null,"methods":["GET","HEAD"],"uri":"api\/user","name":null,"action":"Closure"},{"host":null,"methods":["GET","HEAD"],"uri":"api\/test","name":null,"action":"App\Http\Controllers\TestController@test"},{"host":null,"methods":["GET","HEAD"],"uri":"\/","name":null,"action":"Closure"}],
+            routes : [{"host":null,"methods":["GET","HEAD"],"uri":"api\/user","name":null,"action":"Closure"},{"host":null,"methods":["GET","HEAD"],"uri":"api\/test","name":null,"action":"App\Http\Controllers\TestController@test"},{"host":null,"methods":["GET","HEAD"],"uri":"api\/car_classes","name":null,"action":"App\Http\Controllers\Car\CarClassController@getClassesList"},{"host":null,"methods":["GET","HEAD"],"uri":"\/","name":null,"action":"Closure"}],
             prefix: '',
 
             route : function (name, parameters, route) {

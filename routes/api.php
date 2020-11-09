@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('test', 'TestController@test');
+Route::get('car_classes', 'Car\CarClassController@getClassesList');
+// Route::get('test', 'TestController@test');
+// Route::get('test', 'TestController@test');
