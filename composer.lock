@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6558f74828bca9ebecac73d90cea4b1a",
+    "content-hash": "2e3d374e3e3b78a2d5a387a525dbbf2a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5061,6 +5061,61 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "lord/laroute",
+            "version": "2.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aaronlord/laroute.git",
+                "reference": "01534b2beafe1ffd340ef402a268f497b0658d0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aaronlord/laroute/zipball/01534b2beafe1ffd340ef402a268f497b0658d0b",
+                "reference": "01534b2beafe1ffd340ef402a268f497b0658d0b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/console": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lord\\Laroute\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Lord",
+                    "email": "hello@aaronlord.is"
+                }
+            ],
+            "description": "Access Laravels URL/Route helper functions, from JavaScript.",
+            "keywords": [
+                "javascript",
+                "laravel",
+                "routes",
+                "routing"
+            ],
+            "support": {
+                "issues": "https://github.com/aaronlord/laroute/issues",
+                "source": "https://github.com/aaronlord/laroute/tree/2.5.3"
+            },
+            "time": "2020-07-30T12:18:48+00:00"
         },
         {
             "name": "mockery/mockery",
