@@ -16,6 +16,7 @@ class CreateCarClassesTable extends Migration
         Schema::create('car_classes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('class_name', 5);
         });
     }
 
