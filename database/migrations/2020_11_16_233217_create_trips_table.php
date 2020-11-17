@@ -14,7 +14,7 @@ class CreateTripsTable extends Migration
     public function up()
     {
         Schema::create('trips', function (Blueprint $table) {
-            $table->string('uid', 32)->unique();
+            $table->string('id', 32)->unique();
             $table->timestamps();
 
             $table->string('car_id', 28)->nullable();
