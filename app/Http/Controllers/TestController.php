@@ -27,6 +27,6 @@ class TestController extends Controller
         // ]);        
         // $car->save();
 
-        return Car::all()[0]->carClass()->get();
+        return Car::all();
     }
 }
