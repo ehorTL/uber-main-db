@@ -24,12 +24,16 @@ class CarClassSeeder extends Seeder
     private function getCarClassesData()
     {
         return [
+            "any",
             "A",
             "B",
             "C",
             "D",
             "E",
             "F",
+            "S",
+            "M",
+            "J"
         ];
     }
 }

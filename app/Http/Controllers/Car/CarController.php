@@ -23,6 +23,11 @@ class CarController extends Controller
             "capacity" => $data['capacity'],
             "car_class_id" => $data['car_class_id'],
             "note" => $data['note'],
+            "accepts_rides" => $data['accepts_rides'],
+            "on_the_ride" => $data['on_the_ride'],
+            "car_status_id" => $data['car_status_id'],
+            "coord_latitude" => $data['coord_latitude'],
+            "coord_longitude" => $data['coord_longitude'],
         ]);
         $car->save();
 

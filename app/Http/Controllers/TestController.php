@@ -12,6 +12,7 @@ class TestController extends Controller
 {
     public function test()
     {
+        return DB::table('cars')->select('id')->where('email', '=', 'hello@test.test')->get();
         // $car = new Car([
         //     "id" => "2UJoDWbQhEZiAlUtwfLclaQMti22",
         //     "email" => "hello@test.test",

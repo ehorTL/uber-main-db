@@ -24,15 +24,20 @@ class CreateCarRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
             'uid' => 'required',
+            'email' => 'required|email',
             'first_name' => 'present',
             'middle_name' => 'present',
             'last_name' => 'present',
             'phone' => 'present',
             'capacity' => 'present',
+            'accepts_rides' => 'present',
+            'on_the_ride' => 'present',
             'car_class_id' => 'present',
-            'note' => 'present'
+            'note' => 'present',
+            'car_status_id' => 'present',
+            'coord_latitude' => 'present',
+            'coord_longitude' => 'present',
         ];
     }
 }

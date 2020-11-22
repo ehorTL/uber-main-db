@@ -16,12 +16,14 @@ class Trip extends Model
         'rider_id',
         'ride_from_timestamp',
         'ride_to_timestamp',
-        'cost',
-        'address_from',
-        'address_to',
         'from_coord_latitude',
         'from_coord_longitude',
         'to_coord_latitude',
-        'to_coord_longitude'
+        'to_coord_longitude',
+        'status',
+        'cost',
+        'distance',
+        'address_from',
+        'address_to',
     ];
 }

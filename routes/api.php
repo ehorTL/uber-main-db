@@ -14,21 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('test', 'TestController@test');
 Route::get('car_classes', 'Car\CarClassController@getClassesList');
-
 Route::prefix('front')->group(function () {
     Route::post('rider', 'Rider\RiderController@create');
     Route::get('rider/{id}', 'Rider\RiderController@show');
     Route::put('rider/{id}', 'Rider\RiderController@update');
+    Route::patch('rider/{id}', 'Rider\RiderController@patch');
+    Route::delete('rider/{id}', 'Rider\RiderController@delete');
+    Route::get('rider/{id}/trips', 'Rider\RiderController@showTrips');
 
     Route::post('car', 'Car\CarController@create');
     Route::get('car/{id}', 'Car\CarController@show');
     Route::put('car/{id}', 'Car\CarController@update');
+    Route::patch('car/{id}', 'Car\CarController@change');
+    Route::delete('car/{id}', 'Car\CarController@delete');
 });
 
 Route::prefix('services')->group(function () {
@@ -37,4 +36,8 @@ Route::prefix('services')->group(function () {
     Route::post('trip', 'Trip\TripController@create');
     Route::get('trip/{id}', 'Trip\TripController@show');
     Route::put('trip/{id}', 'Trip\TripController@update');
+    Route::patch('trip/{id}', 'Trip\TripController@change');
+    Route::delete('trip/{id}', 'Trip\TripController@delete');
 });
+
+Route::get('test', 'TestController@test');

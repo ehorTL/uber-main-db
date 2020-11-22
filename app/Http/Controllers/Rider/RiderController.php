@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRiderRequest;
 use App\Http\Requests\Rider\UpdateRiderRequest;
 use App\Models\Rider\Rider;
+use App\Models\Trip\Trip;
 use Illuminate\Http\Request;
 
 class RiderController extends Controller
 {
     public function create(CreateRiderRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $rider = new Rider([
             'email' => $data['email'],
             'id' => $data['uid'],
@@ -50,5 +51,10 @@ class RiderController extends Controller
     public function delete(Request $request, $id)
     {
         Rider::destroy($id);
+    }
+
+    public function showTrips($rider_id)
+    {
+        return Trip::where('rider_id', '=', $rider_id)->get();
     }
 }
