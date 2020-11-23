@@ -24,7 +24,15 @@ class UpdateTripRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'client_id' => 'required',
+            'driver_id' => 'required',
+            'from_location' => 'required',
+            'to_location' => 'required',
+            'from_timestamp' => 'required',
+            'to_timestamp' => 'required',
+            'status' => 'present',
+            'distance' => 'required',
+            'price' => 'required'
         ];
     }
 }

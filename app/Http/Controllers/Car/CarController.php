@@ -65,6 +65,6 @@ class CarController extends Controller
 
     public function delete(Request $request, $id)
     {
-        Car::destroy($id);
+        return Car::destroy($id);
     }
 }
