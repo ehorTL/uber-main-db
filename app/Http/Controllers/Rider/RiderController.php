@@ -31,6 +31,9 @@ class RiderController extends Controller
     {
         $data = $request->all();
         $rider = Rider::find($id);
+        if (!$rider) {
+            return response('Not found', 404);
+        }
 
         $rider->email = $data['email'];
         $rider->phone = $data['phone'];
@@ -45,12 +48,22 @@ class RiderController extends Controller
 
     public function show(Request $request, $id)
     {
-        return Rider::find($id);
+        $rider = Rider::find($id);
+        if ($rider) {
+            return response()->json($rider);
+        } else {
+            return response('Not found', 404);
+        }
     }
 
     public function delete(Request $request, $id)
     {
-        Rider::destroy($id);
+        $wasDeleted = Rider::destroy($id);
+        if ($wasDeleted) {
+            return response()->json(['Status' => 'deleted']);
+        } else {
+            return response('Not found', 404);
+        }
     }
 
     public function showTrips($rider_id)

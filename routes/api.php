@@ -23,6 +23,7 @@ Route::prefix('front')->group(function () {
     Route::delete('rider/{id}', 'Rider\RiderController@delete');
     Route::get('rider/{id}/trips', 'Rider\RiderController@showTrips');
 
+    // car = driver
     Route::post('car', 'Car\CarController@create');
     Route::get('car/{id}', 'Car\CarController@show');
     Route::put('car/{id}', 'Car\CarController@update');
