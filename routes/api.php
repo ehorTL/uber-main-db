@@ -32,6 +32,7 @@ Route::prefix('front')->group(function () {
 });
 
 Route::prefix('services')->group(function () {
+    // Route::post('helper/reduce', 'Service\HelperController@reduce');
     Route::post('helper/reduce', 'Service\HelperController@reduce');
 
     Route::post('trip', 'Trip\TripController@create');

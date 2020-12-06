@@ -35,4 +35,14 @@ class JsonMapper
             "status" => $trip->status
         ];
     }
+
+    public static function boolCast($boolVal)
+    {
+        $lower = strtolower($boolVal);
+        if ($lower == 1 || $lower == 'true') {
+            return true;
+        }
+
+        return false;
+    }
 }
