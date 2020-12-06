@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Car\UpdateCarRequest;
 use App\Http\Requests\CreateCarRequest;
 use App\Models\Car\Car;
+use App\Models\Trip\Trip;
 use Illuminate\Http\Request;
+use App\Services\JsonMapper;
 
 class CarController extends Controller
 {
@@ -126,5 +128,16 @@ class CarController extends Controller
 
         $car->save();
         return $car;
+    }
+
+    public function showTrips($car_id)
+    {
+        $trips = Trip::where('car_id', '=', $car_id)->get();
+        $ans = array();
+
+        foreach ($trips as $trip) {
+            $ans = JsonMapper::tripFromDBToJson($trip);
+        }
+        return $ans;
     }
 }

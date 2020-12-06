@@ -8,6 +8,7 @@ use App\Http\Requests\Rider\UpdateRiderRequest;
 use App\Models\Rider\Rider;
 use App\Models\Trip\Trip;
 use Illuminate\Http\Request;
+use App\Services\JsonMapper;
 
 class RiderController extends Controller
 {
@@ -68,6 +69,12 @@ class RiderController extends Controller
 
     public function showTrips($rider_id)
     {
-        return Trip::where('rider_id', '=', $rider_id)->get();
+        $trips = Trip::where('rider_id', '=', $rider_id)->get();
+        $ans = array();
+
+        foreach ($trips as $trip) {
+            $ans = JsonMapper::tripFromDBToJson($trip);
+        }
+        return $ans;
     }
 }

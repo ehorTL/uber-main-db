@@ -29,6 +29,7 @@ Route::prefix('front')->group(function () {
     Route::put('car/{id}', 'Car\CarController@update');
     Route::patch('car/{id}', 'Car\CarController@change');
     Route::delete('car/{id}', 'Car\CarController@delete');
+    Route::get('car/{id}/trips', 'Car\CarController@showTrips');
 });
 
 Route::prefix('services')->group(function () {
