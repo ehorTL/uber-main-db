@@ -21,7 +21,7 @@ class Trip extends Model
         'to_coord_latitude',
         'to_coord_longitude',
         'status',
-        'cost',
+        'price',
         'distance',
         'address_from',
         'address_to',

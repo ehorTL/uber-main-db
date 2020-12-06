@@ -14,10 +14,8 @@ class CreateRidersTable extends Migration
     public function up()
     {
         Schema::create('riders', function (Blueprint $table) {
-            // $table->uuid('id')->unique();
-            $table->string('id', 28)->unique();
+            $table->string('id', 40)->unique();
             $table->timestamps();
-
             $table->string('email');
             $table->string('phone');
             $table->string('first_name');

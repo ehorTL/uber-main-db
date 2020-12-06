@@ -26,8 +26,10 @@ class UpdateTripRequest extends FormRequest
         return [
             'client_id' => 'required',
             'driver_id' => 'required',
-            'from_location' => 'required',
-            'to_location' => 'required',
+
+            'from_point' => 'required',
+            'to_point' => 'required',
+
             'from_timestamp' => 'required',
             'to_timestamp' => 'required',
             'status' => 'present',

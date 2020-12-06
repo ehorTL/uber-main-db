@@ -14,8 +14,7 @@ class CreateCarsTable extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
-            // $table->uuid('id')->unique();
-            $table->string('id', 28)->unique();
+            $table->string('id', 40)->unique();
             $table->timestamps();
 
             $table->string('email');
@@ -30,16 +29,16 @@ class CreateCarsTable extends Migration
             $table->unsignedBigInteger('car_class_id');
 
             $table->string('note')->nullable();
-            $table->unsignedBigInteger('car_status_id')->nullable();
+            // $table->unsignedBigInteger('car_statuss_id')->nullable();
 
-            $table->decimal('coord_latitude', 10, 6)->nullable();
-            $table->decimal('coord_longitude', 10, 6)->nullable();
+            $table->float('coord_latitude')->nullable();
+            $table->float('coord_longitude')->nullable();
         });
 
         Schema::table('cars', function (Blueprint $table) {
             // onDelete('RESTRICT') by default
             $table->foreign('car_class_id')->references('id')->on('car_classes');
-            $table->foreign('car_status_id')->references('id')->on('car_statuses');
+            // $table->foreign('car_status_id')->references('id')->on('car_statuses');
         });
     }
 

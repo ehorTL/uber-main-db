@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Trip;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Trip\CreateTripRequest;
-use App\Http\Requests\Trip\PatchTripRequest;
 use App\Http\Requests\Trip\UpdateTripRequest;
 use App\Models\Trip\Trip;
 use Illuminate\Http\Request;
+use App\Services;
+use App\Services\JsonMapper;
 
 class TripController extends Controller
 {
@@ -18,93 +19,121 @@ class TripController extends Controller
             'id' => $data['trip_id'],
             'rider_id' => $data['client_id'],
             'car_id' => $data['driver_id'],
+
+            'from_coord_latitude' => $data['from_point']['location']['latitude'],
+            'from_coord_longitude' => $data['from_point']['location']['longitude'],
+            'to_coord_latitude' => $data['to_point']['location']['latitude'],
+            'to_coord_longitude' => $data['to_point']['location']['longitude'],
+            'address_from' => $data['from_point']['address']['address_full'],
+            'address_to' => $data['to_point']['address']['address_full'],
+
             'ride_from_timestamp' => $data['from_timestamp'],
             'ride_to_timestamp' => $data['to_timestamp'],
-            'from_coord_latitude' => $data['from_location']['latitude'],
-            'from_coord_longitude' => $data['from_location']['longitude'],
-            'to_coord_latitude' => $data['to_location']['latitude'],
-            'to_coord_longitude' => $data['to_location']['longitude'],
-            // 'address_from' => $data[],
-            // 'address_to' => $data[],
-            'cost' => $data['price'],
+            'price' => $data['price'],
             'distance' => $data['distance'],
+            'status' => $data['status'],
         ]);
         $trip->save();
 
-        return $trip;
+        return JsonMapper::tripFromDBToJson($trip);
     }
 
     public function show(Request $request, $id)
     {
-        return Trip::find($id);
+        $trip = Trip::find($id);
+        if ($trip) {
+            $tripMapped = JsonMapper::tripFromDBToJson($trip);
+            return response()->json($tripMapped);
+        } else {
+            return response('Not found', 404);
+        }
     }
 
     public function update(UpdateTripRequest $request, $id)
     {
         $data = $request->validated();
-        $trip = new Trip([
-            'rider_id' => $data['client_id'],
-            'car_id' => $data['driver_id'],
-            'ride_from_timestamp' => $data['from_timestamp'],
-            'ride_to_timestamp' => $data['to_timestamp'],
-            'from_coord_latitude' => $data['from_location']['latitude'],
-            'from_coord_longitude' => $data['from_location']['longitude'],
-            'to_coord_latitude' => $data['to_location']['latitude'],
-            'to_coord_longitude' => $data['to_location']['longitude'],
-            // 'address_from' => $data[],
-            // 'address_to' => $data[],
-            'cost' => $data['price'],
-            'distance' => $data['distance'],
-        ]);
+
+        $trip = Trip::find($id);
+        if (empty($trip)) {
+            return response('Not found', 404);
+        }
+
+        $trip->rider_id = $data['client_id'];
+        $trip->car_id = $data['driver_id'];
+        $trip->from_coord_latitude = $data['from_point']['location']['latitude'];
+        $trip->from_coord_longitude = $data['from_point']['location']['longitude'];
+        $trip->to_coord_latitude = $data['to_point']['location']['latitude'];
+        $trip->to_coord_longitude = $data['to_point']['location']['longitude'];
+        $trip->address_from = $data['from_point']['address']['address_full'];
+        $trip->address_to = $data['to_point']['address']['address_full'];
+
+        $trip->ride_from_timestamp = $data['from_timestamp'];
+        $trip->ride_to_timestamp = $data['to_timestamp'];
+        $trip->price = $data['price'];
+        $trip->distance = $data['distance'];
+        $trip->status = $data['status'];
+
         $trip->save();
 
-        return $trip;        
+        return JsonMapper::tripFromDBToJson($trip);
     }
 
     public function change(Request $request, $id)
     {
         $data = $request->all();
-        $trip = Trip::find($id);
 
-        if (isset($data['client_id'])){
+        $trip = Trip::find($id);
+        if (empty($trip)) {
+            return response('Not found', 404);
+        }
+
+        if (isset($data['client_id'])) {
             $trip->rider_id = $data['client_id'];
         }
-        if (isset($data['car_id'])){
-            $trip->rider_id = $data['car_id'];
+        if (isset($data['driver_id'])) {
+            $trip->car_id = $data['driver_id'];
         }
-        if (isset($data['from_timestamp'])){
+        if (isset($data['from_timestamp'])) {
             $trip->ride_from_timestamp = $data['from_timestamp'];
         }
-        if (isset($data['to_timestamp'])){
+        if (isset($data['to_timestamp'])) {
             $trip->ride_to_timestamp = $data['to_timestamp'];
         }
-        if (isset($data['from_location']['latitude'])){
-            $trip->from_coord_latitude = $data['from_location']['latitude'];
+        if (isset($data['from_point']['location']['latitude'])) {
+            $trip->from_coord_latitude = $data['from_point']['location']['latitude'];
         }
-        if (isset($data['from_location']['longitude'])){
-            $trip->from_coord_longitude = $data['from_location']['longitude'];
+        if (isset($data['from_point']['location']['longitude'])) {
+            $trip->from_coord_longitude = $data['from_point']['location']['longitude'];
         }
-        if (isset($data['to_location']['latitude'])){
-            $trip->to_coord_latitude = $data['to_location']['latitude'];
+        if (isset($data['to_point']['location']['latitude'])) {
+            $trip->to_coord_latitude = $data['to_point']['location']['latitude'];
         }
-        if (isset($data['to_location']['longitude'])){
-            $trip->to_coord_longitude = $data['to_location']['longitude'];
+        if (isset($data['to_point']['location']['longitude'])) {
+            $trip->to_coord_longitude = $data['to_point']['location']['longitude'];
         }
-        if (isset($data['price'])){
-            $trip->cost = $data['price'];
+        if (isset($data['from_point']['address']['address_full'])) {
+            $trip->address_from = $data['from_point']['address']['address_full'];
         }
-        if (isset($data['distancear_id'])){
+        if (isset($data['to_point']['address']['address_full'])) {
+            $trip->address_to = $data['to_point']['address']['address_full'];
+        }
+        if (isset($data['price'])) {
+            $trip->price = $data['price'];
+        }
+        if (isset($data['distance'])) {
             $trip->distance = $data['distance'];
-        }        
+        }
+        if (isset($data['status'])) {
+            $trip->status = $data['status'];
+        }
 
         $trip->save();
-        
-        return $trip;
+
+        return JsonMapper::tripFromDBToJson($trip);
     }
 
     public function delete(Request $request, $id)
     {
         return Trip::destroy($id);
-
     }
 }

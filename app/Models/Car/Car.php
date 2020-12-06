@@ -22,7 +22,7 @@ class Car extends Model
         'on_the_ride',
         'car_class_id',
         'note',
-        'car_status_id',
+        // 'car_status_id',
         'coord_latitude',
         'coord_longitude',
     ];

@@ -35,7 +35,7 @@ class CreateCarRequest extends FormRequest
             'on_the_ride' => 'present',
             'car_class_id' => 'present',
             'note' => 'present',
-            'car_status_id' => 'present',
+            // 'car_status_id' => 'present',
             'coord_latitude' => 'present',
             'coord_longitude' => 'present',
         ];
