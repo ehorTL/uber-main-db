@@ -17,20 +17,28 @@ class HelperController extends Controller
         $car_type = intval($request->query('car_type')); // == car_class_id
         $drivers_id = json_decode($request->getContent(), true);
 
+        $reduced_card = [];
         // accepts any car class
         if ($car_type == 1) {
-            return DB::table('cars')->select('id')->whereIn('id', $drivers_id)
+            $reduced_cars = DB::table('cars')->select('id')->whereIn('id', $drivers_id)
                 ->where('capacity', '>=', $capacity)
                 ->where('accepts_rides', $accepts_rides)
                 ->where('on_the_ride', $on_the_ride)
                 ->get();
         } else {
-            return DB::table('cars')->select('id')->whereIn('id', $drivers_id)
+            $reduced_cars = DB::table('cars')->select('id')->whereIn('id', $drivers_id)
                 ->where('capacity', '>=', $capacity)
                 ->where('car_class_id', $car_type)
                 ->where('accepts_rides', $accepts_rides)
                 ->where('on_the_ride', $on_the_ride)
                 ->get();
         }
+
+        $ans = array();
+        foreach ($reduced_cars as $car) {
+            $ans[] = $car->id;
+        }
+
+        return $ans;
     }
 }
